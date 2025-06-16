@@ -1,119 +1,115 @@
-/* Reset básico */
-* {
+/* === Fondo animado con puntos === */
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #0f111a;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0a0f1c;
   color: #ffffff;
-  overflow-x: hidden;
-}
-
-/* Fondo parallax animado */
-.parallax-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  background-image: radial-gradient(#1b2735 1px, transparent 0);
-  background-size: 25px 25px;
-  animation: move 30s linear infinite;
-  pointer-events: none;
-}
-
-@keyframes move {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 100px 100px;
-  }
-}
-
-/* Contenido centrado */
-.content {
+  height: 100vh;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  position: relative;
+}
+
+/* Capa de puntos */
+body::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  background-image: radial-gradient(rgba(0, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: moveDots 40s linear infinite;
+  z-index: 0;
+}
+
+/* Movimiento sutil */
+@keyframes moveDots {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-50px, -50px); }
+}
+
+/* === Container === */
+.container {
   text-align: center;
+  animation: fadeIn 1.2s ease-in;
   position: relative;
   z-index: 1;
 }
 
-/* Título con glow */
+/* === Títulos con gradiente Miku === */
 h1 {
   font-size: 3rem;
-  font-weight: 900;
-  background: linear-gradient(to right, #00c3ff, #58fbd3);
+  font-weight: bold;
+  position: relative;
+}
+
+.miku1 {
+  background: linear-gradient(to right, #00f2fe, #00c3ff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  position: relative;
-  display: inline-block;
-  margin-bottom: 0.5rem;
+}
+
+.miku2 {
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 h1::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   bottom: -10px;
-  width: 100%;
+  width: 80%;
   height: 10px;
-  background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.4), transparent);
+  background: rgba(0, 255, 255, 0.3);
   filter: blur(8px);
-  z-index: -1;
+  border-radius: 50%;
 }
 
-/* Texto con máquina de escribir */
-.typing {
-  font-size: 1.1rem;
-  color: #ffffff;
-  white-space: nowrap;
+/* === Typewriter effect === */
+.typewriter {
+  display: inline-block;
   overflow: hidden;
-  border-right: 2px solid #00e6e6;
+  white-space: nowrap;
+  border-right: 2px solid #00f2fe;
+  font-size: 1.1rem;
   width: 0;
-  animation: typing 3s steps(40, end) forwards, blink-caret 0.7s step-end infinite;
+  animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
 }
 
 @keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
-    width: 25ch; /* ajusta esto al largo del texto */
-  }
+  from { width: 0; }
+  to { width: 100%; }
 }
 
-@keyframes blink-caret {
-  0%, 100% {
-    border-color: transparent;
-  }
-  50% {
-    border-color: #00e6e6;
-  }
+@keyframes blink {
+  50% { border-color: transparent; }
 }
 
-/* Botón */
+/* === Botón === */
 .button {
-  margin-top: 1.5rem;
-  padding: 0.6rem 1.2rem;
-  font-size: 1rem;
-  background-color: #28e1d9;
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #1dd2af;
   color: #000;
-  border: none;
-  border-radius: 1.5rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background 0.3s ease;
 }
 
 .button:hover {
-  background-color: #18b8af;
+  background-color: #13c2a2;
+}
+
+/* === Animación fade-in === */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
