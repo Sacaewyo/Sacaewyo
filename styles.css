@@ -50,13 +50,44 @@ body {
   background: linear-gradient(135deg, #39c5bb, #00b0ff, #a8e6cf);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  position: relative;
 }
 
-p {
+/* Glow effect */
+.glow {
+  width: 120px;
+  height: 6px;
+  background: radial-gradient(ellipse at center, rgba(100,255,255,0.6) 0%, transparent 70%);
+  filter: blur(6px);
+  animation: glow-pulse 2s ease-in-out infinite;
+  margin-bottom: 2rem;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.6; transform: scaleX(1); }
+  50% { opacity: 1; transform: scaleX(1.5); }
+}
+
+/* Typewriter style */
+.typewriter {
   font-size: 1.2rem;
   color: #cfd8dc;
   margin-bottom: 2rem;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.cursor {
+  display: inline-block;
+  width: 1ch;
+  animation: blink 1s step-start infinite;
+  color: #39c5bb;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
 }
 
 .about-btn {
@@ -81,12 +112,17 @@ p {
     font-size: 2.5rem;
   }
 
-  p {
+  .typewriter {
     font-size: 1rem;
   }
 
   .about-btn {
     padding: 0.6rem 1.2rem;
     font-size: 0.9rem;
+  }
+
+  .glow {
+    width: 80px;
+    height: 4px;
   }
 }
