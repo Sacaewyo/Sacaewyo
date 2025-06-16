@@ -1,37 +1,38 @@
-/* Reset básico */
+/* Reset & font */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 100vh;
   overflow: hidden;
-  font-family: 'Segoe UI', sans-serif;
-  background: #0f1117;
-  color: #ccffff;
+  background-color: #0b0f1a;
+  position: relative;
+  color: white;
 }
 
-/* Fondo parallax animado */
-.background {
+.parallax-bg {
   position: absolute;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(0,255,255,0.1) 1px, transparent 1px),
-              radial-gradient(circle, rgba(255,0,255,0.05) 2px, transparent 2px);
-  background-size: 50px 50px;
+  background-image: radial-gradient(#1e2a3a 1px, transparent 1px);
+  background-size: 30px 30px;
   animation: move 60s linear infinite;
   z-index: 0;
+  top: -50%;
+  left: -50%;
+  transform: translate(25%, 25%);
 }
 
 @keyframes move {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(-25%, -25%); }
+  0% { transform: translate(25%, 25%); }
+  100% { transform: translate(0%, 0%); }
 }
 
-/* Contenido principal */
-main {
+.content {
   position: relative;
   z-index: 1;
   height: 100vh;
@@ -39,48 +40,53 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: transparent;
   text-align: center;
-  padding: 2rem;
+  padding: 1rem;
 }
 
-h1 {
+.gradient-text {
   font-size: 4rem;
-  background: linear-gradient(90deg, #00f0ff, #3fd0c9, #00f0ff);
+  font-weight: 800;
+  background: linear-gradient(135deg, #39c5bb, #00b0ff, #a8e6cf);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  font-weight: bold;
   margin-bottom: 1rem;
 }
 
 p {
   font-size: 1.2rem;
-  color: #a0f0ff;
+  color: #cfd8dc;
   margin-bottom: 2rem;
 }
 
-a {
+.about-btn {
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  background: #39c5bb;
+  color: #0b0f1a;
+  border: none;
+  border-radius: 999px;
   text-decoration: none;
-  font-weight: bold;
-  color: #8affd1;
-  border: 2px solid #8affd1;
-  padding: 0.6rem 1.4rem;
-  border-radius: 10px;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease;
 }
 
-a:hover {
-  background-color: #8affd1;
-  color: #0f1117;
+.about-btn:hover {
+  background: #00b0ff;
+  color: white;
 }
 
 /* Responsive */
 @media (max-width: 600px) {
-  h1 {
+  .gradient-text {
     font-size: 2.5rem;
   }
 
   p {
     font-size: 1rem;
+  }
+
+  .about-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
   }
 }
