@@ -1,42 +1,65 @@
 body {
-  background-color: #fff;
-  color: #111;
+  background-color: #0d1117;
+  color: #9cf;
   font-family: 'Courier New', Courier, monospace;
-  line-height: 1.6;
   margin: 0;
-  padding: 0;
-}
-
-main {
-  max-width: 600px;
-  margin: 4rem auto;
-  padding: 0 1rem;
-  text-align: left;
-}
-
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-h2 {
-  font-size: 1.2rem;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
-}
-
-p, li {
-  font-size: 1rem;
-}
-
-ul {
-  padding-left: 1rem;
+  padding: 2rem;
 }
 
 a {
-  color: #000;
+  color: #9cf;
   text-decoration: underline;
+  text-underline-offset: 3px;
 }
-a:hover {
-  text-decoration: none;
+
+.wrapper {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.title {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.nav {
+  margin: 0.5rem 0;
+}
+
+.nav a {
+  margin-right: 1rem;
+}
+
+.icon {
+  font-size: 2rem;
+}
+
+.content {
+  margin-top: 2rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+}
+
+code {
+  background: #161b22;
+  padding: 2px 4px;
+  border-radius: 4px;
 }
