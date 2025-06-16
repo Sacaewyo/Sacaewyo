@@ -1,29 +1,34 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Sacaewyo</title>
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <img src="assets/tuimagen.jpg" alt="foto" class="profile" />
+  <div class="wrapper">
+    <div class="header">
+      <img src="assets/miku.jpg" alt="Foto" class="avatar">
+      <div>
+        <h1 class="title">sacaewyo.xyz</h1>
+        <nav class="nav">
+          <a href="#">/contact</a>
+          <a href="#">/blog</a>
+        </nav>
+        <div class="icon">🐙</div>
+      </div>
+    </div>
 
-    <h1 class="title">/Sacaewyo</h1>
+    <div class="content">
+      <p>Hi! I'm [Tu Nombre], a developer focused on building clean and minimalist web experiences.</p>
+      <p>I primarily work in HTML, CSS, and sometimes Rust or Go. I'm always learning things that simplify the web.</p>
 
-    <nav class="nav">
-      <a href="#">/blog</a>
-      <a href="#">/contacto</a>
-    </nav>
-
-    <p class="intro">
-      Soy un desarrollador web enfocado en crear sitios simples, eficientes y rápidos. Me interesa el minimalismo y la accesibilidad en la web.
-    </p>
-
-    <div class="links">
-      <a href="https://github.com/sacaewyo" target="_blank">GitHub</a>
-      <a href="mailto:correo@ejemplo.com">Email</a>
+      <h2>Past Work</h2>
+      <ul>
+        <li>Built a site that loads under 1 second</li>
+        <li>Created a mini CMS in <code>~300 LOC</code></li>
+      </ul>
     </div>
   </div>
 </body>
