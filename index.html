@@ -25,13 +25,11 @@
       if (i < text.length) {
         target.textContent += text.charAt(i);
         i++;
-        setTimeout(typeWriter, 50); // velocidad de escritura
+        setTimeout(typeWriter, 50);
       }
     }
 
-    window.addEventListener("DOMContentLoaded", () => {
-      typeWriter();
-    });
+    window.addEventListener("DOMContentLoaded", typeWriter);
   </script>
 </body>
 </html>
