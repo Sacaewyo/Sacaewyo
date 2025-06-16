@@ -12,8 +12,26 @@
   <main class="content">
     <h1 class="gradient-text">Sacaewyo</h1>
     <div class="glow"></div>
-    <p class="typewriter">Web dev & Casual Gamer.<span class="cursor">|</span></p>
+    <p class="typewriter"><span id="type-text"></span><span class="cursor">|</span></p>
     <a href="/sub/index.html" class="about-btn">About me.</a>
   </main>
+
+  <script>
+    const text = "Web dev & Casual Gamer.";
+    const target = document.getElementById("type-text");
+    let i = 0;
+
+    function typeWriter() {
+      if (i < text.length) {
+        target.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50); // velocidad de escritura
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      typeWriter();
+    });
+  </script>
 </body>
 </html>
