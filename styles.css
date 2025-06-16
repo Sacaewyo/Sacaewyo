@@ -1,84 +1,111 @@
-/* Colores inspirados en Hatsune Miku */
-:root {
-  --miku-cyan: #39c5bb;
-  --miku-light: #94fff4;
-  --miku-dark: #1a1f2b;
-  --miku-glow: rgba(57, 197, 187, 0.4);
-}
-
+/* RESET Y FUENTE */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
-  background: var(--miku-dark);
-  color: var(--miku-cyan);
-  height: 100vh;
-  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  color: #ffffff;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #2afadf 0%, #4c83ff 100%);
+  background-size: 400% 400%;
+  background-attachment: fixed;
+  animation: gradientFlow 15s ease infinite;
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
+  padding: 2rem;
 }
 
-/* Fondo animado con círculos */
-.background {
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at center, var(--miku-glow) 1px, transparent 1px);
-  background-size: 80px 80px;
-  animation: pan 40s linear infinite;
-  z-index: 0;
-  opacity: 0.4;
-}
-
-@keyframes pan {
-  from { transform: translate(0, 0); }
-  to { transform: translate(-50%, -50%); }
-}
-
-.content {
-  position: relative;
+/* CONTENEDOR PRINCIPAL */
+.container {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 2rem 3rem;
+  max-width: 700px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   text-align: center;
-  z-index: 1;
+  animation: fadeIn 1.5s ease;
 }
 
-.title {
-  font-size: 5rem;
-  background: linear-gradient(90deg, var(--miku-light), var(--miku-cyan));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: glow 2s infinite alternate;
+/* IMAGEN DE PERFIL */
+.profile-img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 999px;
+  border: 4px solid #2afadf;
+  margin-bottom: 1rem;
 }
 
-@keyframes glow {
-  from { text-shadow: 0 0 10px var(--miku-cyan); }
-  to { text-shadow: 0 0 20px var(--miku-light); }
+/* TITULO Y DESCRIPCIÓN */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.subtitle {
-  font-size: 1.5rem;
-  margin-top: 1rem;
-  color: var(--miku-light);
+p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
 }
 
-.button {
-  display: inline-block;
-  margin-top: 2rem;
-  padding: 0.8rem 2rem;
-  background-color: var(--miku-cyan);
-  color: #000;
+/* ENLACES */
+a {
+  color: #2afadf;
   text-decoration: none;
-  font-weight: bold;
-  border-radius: 8px;
-  box-shadow: 0 0 10px var(--miku-cyan);
-  transition: transform 0.2s ease;
+  font-weight: 600;
+  transition: color 0.2s ease;
 }
 
-.button:hover {
-  transform: scale(1.05);
+a:hover {
+  color: #a8f0ff;
+}
+
+/* ANIMACIONES */
+@keyframes gradientFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem;
+  }
+
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
 }
