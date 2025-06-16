@@ -1,4 +1,4 @@
-/* Reset & font */
+/* Reset básico */
 * {
   margin: 0;
   padding: 0;
@@ -6,126 +6,114 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  height: 100vh;
-  overflow: hidden;
-  background-color: #0b0f1a;
-  position: relative;
-  color: white;
+  font-family: 'Poppins', sans-serif;
+  background-color: #0f111a;
+  color: #ffffff;
+  overflow-x: hidden;
 }
 
+/* Fondo parallax animado */
 .parallax-bg {
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background-image: radial-gradient(#1e2a3a 1px, transparent 1px);
-  background-size: 30px 30px;
-  animation: move 60s linear infinite;
-  will-change: transform;
-  z-index: 0;
-  top: -50%;
-  left: -50%;
-  transform: translate(25%, 25%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: radial-gradient(#1b2735 1px, transparent 0);
+  background-size: 25px 25px;
+  animation: move 30s linear infinite;
+  pointer-events: none;
 }
 
 @keyframes move {
-  0% { transform: translate(25%, 25%); }
-  100% { transform: none; }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 100px 100px;
+  }
 }
 
+/* Contenido centrado */
 .content {
-  position: relative;
-  z-index: 1;
-  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   text-align: center;
-  padding: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
-.gradient-text {
-  font-size: 4rem;
-  font-weight: 800;
-  background: linear-gradient(135deg, #39c5bb, #00b0ff, #a8e6cf);
+/* Título con glow */
+h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  background: linear-gradient(to right, #00c3ff, #58fbd3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 0.5rem;
   position: relative;
+  display: inline-block;
+  margin-bottom: 0.5rem;
 }
 
-/* Glow under title */
-.glow {
-  width: 120px;
-  height: 6px;
-  background: radial-gradient(ellipse at center, rgba(100,255,255,0.6) 0%, transparent 70%);
-  filter: blur(6px);
-  animation: glow-pulse 2s ease-in-out infinite;
-  margin-bottom: 2rem;
+h1::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -10px;
+  width: 100%;
+  height: 10px;
+  background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.4), transparent);
+  filter: blur(8px);
+  z-index: -1;
 }
 
-@keyframes glow-pulse {
-  0%, 100% { opacity: 0.6; transform: scaleX(1); }
-  50% { opacity: 1; transform: scaleX(1.5); }
-}
-
-/* Typewriter */
-.typewriter {
-  font-size: 1.2rem;
-  color: #cfd8dc;
-  margin-bottom: 2rem;
+/* Texto con máquina de escribir */
+.typing {
+  font-size: 1.1rem;
+  color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-right: 2px solid #00e6e6;
+  width: 0;
+  animation: typing 3s steps(40, end) forwards, blink-caret 0.7s step-end infinite;
 }
 
-.cursor {
-  font-weight: bold;
-  color: #39c5bb;
-  animation: blink 1s step-end infinite;
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 25ch; /* ajusta esto al largo del texto */
+  }
 }
 
-@keyframes blink {
-  0%, 49% { opacity: 1; }
-  50%, 100% { opacity: 0; }
+@keyframes blink-caret {
+  0%, 100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #00e6e6;
+  }
 }
 
-.about-btn {
+/* Botón */
+.button {
+  margin-top: 1.5rem;
+  padding: 0.6rem 1.2rem;
   font-size: 1rem;
-  padding: 0.75rem 1.5rem;
-  background: #39c5bb;
-  color: #0b0f1a;
+  background-color: #28e1d9;
+  color: #000;
   border: none;
-  border-radius: 999px;
-  text-decoration: none;
-  transition: background 0.3s ease;
+  border-radius: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.about-btn:hover {
-  background: #00b0ff;
-  color: white;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .gradient-text {
-    font-size: 2.5rem;
-  }
-
-  .typewriter {
-    font-size: 1rem;
-  }
-
-  .about-btn {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-  }
-
-  .glow {
-    width: 80px;
-    height: 4px;
-  }
+.button:hover {
+  background-color: #18b8af;
 }
