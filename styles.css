@@ -1,115 +1,109 @@
-/* === Fondo animado con puntos === */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+:root {
+    --bg: #0a0a0a;
+    --text: #f0f0f0;
+    --accent: #6affae;
+    --gray: #888;
+    --dark: #050505;
+}
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: #0a0f1c;
-  color: #ffffff;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, var(--dark), #0d0d20);
+    color: var(--text);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    line-height: 1.6;
 }
 
-/* Capa de puntos */
-body::before {
-  content: "";
-  position: absolute;
-  width: 200%;
-  height: 200%;
-  background-image: radial-gradient(rgba(0, 255, 255, 0.08) 1px, transparent 1px);
-  background-size: 20px 20px;
-  animation: moveDots 40s linear infinite;
-  z-index: 0;
-}
-
-/* Movimiento sutil */
-@keyframes moveDots {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(-50px, -50px); }
-}
-
-/* === Container === */
 .container {
-  text-align: center;
-  animation: fadeIn 1.2s ease-in;
-  position: relative;
-  z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
 }
 
-/* === Títulos con gradiente Miku === */
+header {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding-top: 3rem;
+}
+
 h1 {
-  font-size: 3rem;
-  font-weight: bold;
-  position: relative;
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(to right, var(--accent), #6ae8ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.05em;
 }
 
-.miku1 {
-  background: linear-gradient(to right, #00f2fe, #00c3ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--gray);
+    margin-top: 0.5rem;
 }
 
-.miku2 {
-  background: linear-gradient(to right, #4facfe, #00f2fe);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.content {
+    display: flex;
+    justify-content: space-between;
+    gap: 4rem;
 }
 
-h1::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -10px;
-  width: 80%;
-  height: 10px;
-  background: rgba(0, 255, 255, 0.3);
-  filter: blur(8px);
-  border-radius: 50%;
+.left-column {
+    flex: 1;
+    max-width: 700px;
 }
 
-/* === Typewriter effect === */
-.typewriter {
-  display: inline-block;
-  overflow: hidden;
-  white-space: nowrap;
-  border-right: 2px solid #00f2fe;
-  font-size: 1.1rem;
-  width: 0;
-  animation: typing 3s steps(30, end) forwards, blink 0.75s step-end infinite;
+.right-column {
+    width: 300px;
 }
 
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
+h2 {
+    color: var(--accent);
+    font-size: 1.8rem;
+    margin-top: 2rem;
 }
 
-@keyframes blink {
-  50% { border-color: transparent; }
+p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
 }
 
-/* === Botón === */
-.button {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #1dd2af;
-  color: #000;
-  text-decoration: none;
-  border-radius: 20px;
-  font-weight: bold;
-  transition: background 0.3s ease;
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: opacity 0.2s;
 }
 
-.button:hover {
-  background-color: #13c2a2;
+a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
 }
 
-/* === Animación fade-in === */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+footer {
+    text-align: center;
+    margin-top: 5rem;
+    padding: 2rem 0;
+    color: var(--gray);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .right-column {
+        width: 100%;
+    }
+    
+    h1 {
+        font-size: 3rem;
+    }
 }
