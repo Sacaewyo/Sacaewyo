@@ -1,328 +1,53 @@
-:root {
-  /* Paleta mejorada para mayor contraste */
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #0f0f0f;
-  --text-primary: #f0f0f0;
-  --accent-primary: #6affae;
-  --accent-secondary: #6ae8ff;
-  --gradient-start: #6affae;
-  --gradient-end: #6ae8ff;
-  --glow-opacity: 0.4;
-  --particle-color-1: rgba(106, 255, 174, 0.7);
-  --particle-color-2: rgba(106, 232, 255, 0.7);
-}
-
-/* Reset mejorado */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  overflow-x: hidden;
-  line-height: 1.6;
-}
-
-.main-container {
-  position: relative;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  z-index: 2; /* Asegura que el contenido esté sobre las partículas */
-}
-
-/* Efectos de fondo */
-.background-effect {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(106, 255, 174, 0.15) 0%, transparent 30%),
-    radial-gradient(circle at 80% 70%, rgba(106, 232, 255, 0.15) 0%, transparent 30%);
-  z-index: -2;
-}
-
-.gradient-overlay {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(15, 15, 15, 0.98) 100%);
-  z-index: -1;
-}
-
-/* Sección hero */
-.hero-section {
-  width: 100%;
-  max-width: 1200px;
-  text-align: center;
-  position: relative;
-}
-
-.content-wrapper {
-  animation: fadeIn 1.5s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Texto gradiente mejorado */
-.gradient-text {
-  font-size: clamp(3rem, 10vw, 6rem);
-  font-weight: 800;
-  background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin: 0;
-  line-height: 1.1;
-  letter-spacing: -0.05em;
-  text-shadow: 0 0 10px rgba(106, 255, 174, 0.3);
-}
-
-/* Divisor animado mejorado */
-.divider-line {
-  position: relative;
-  width: 100%;
-  max-width: 600px;
-  margin: 2rem auto;
-  height: 2px;
-}
-
-.line-effect {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, 
-    transparent, 
-    var(--accent-primary), 
-    transparent);
-  animation: pulse 3s infinite ease-in-out;
-  box-shadow: 0 0 10px var(--accent-primary);
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 0.8; transform: scaleX(0.9); }
-  50% { opacity: 1; transform: scaleX(1.1); }
-}
-
-/* Efecto typewriter mejorado */
-.typewriter-effect {
-  font-size: clamp(1.25rem, 3vw, 2rem);
-  font-weight: 600;
-  background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  margin: 1.5rem 0;
-  min-height: 2rem;
-  display: inline-block;
-  text-shadow: 0 0 5px rgba(106, 255, 174, 0.3);
-}
-
-/* Botón portal mejorado */
-.portal-button {
-  position: relative;
-  display: inline-flex;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: pointer;
-  overflow: hidden;
-  border-radius: 16px;
-  margin-top: 3rem;
-  text-decoration: none;
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  --mouse-x: 50%;
-  --mouse-y: 50%;
-  perspective: 1000px;
-  filter: drop-shadow(0 0 5px rgba(106, 255, 174, 0.3));
-}
-
-.button-content {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  padding: 1.25rem 2.5rem;
-  background: rgba(20, 20, 20, 0.7);
-  border-radius: 16px;
-  border: 1px solid rgba(106, 255, 174, 0.4);
-  backdrop-filter: blur(12px);
-  z-index: 2;
-  transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-  transform-style: preserve-3d;
-}
-
-.button-text {
-  color: var(--accent-primary);
-  font-weight: 600;
-  font-size: 1.25rem;
-  transition: all 0.3s ease;
-  position: relative;
-  z-index: 3;
-}
-
-.button-icon {
-  color: var(--accent-secondary);
-  font-size: 1.5rem;
-  transition: all 0.4s ease;
-  position: relative;
-  z-index: 3;
-}
-
-.button-glow {
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(
-    circle at var(--mouse-x) var(--mouse-y),
-    rgba(106, 255, 174, var(--glow-opacity)) 0%,
-    transparent 70%
-  );
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  pointer-events: none;
-}
-
-/* Efectos hover mejorados */
-.portal-button:hover {
-  transform: translateY(-5px) rotateX(8deg) scale(1.05);
-}
-
-.portal-button:hover .button-content {
-  background: rgba(106, 255, 174, 0.2);
-  box-shadow: 
-    0 10px 40px rgba(106, 255, 174, 0.4),
-    0 6px 20px rgba(106, 255, 174, 0.25);
-  border-color: var(--accent-primary);
-  transform: translateZ(20px);
-}
-
-.portal-button:hover .button-text {
-  color: white;
-  text-shadow: 0 0 10px var(--accent-primary);
-}
-
-.portal-button:hover .button-icon {
-  transform: translateX(5px);
-  color: white;
-  text-shadow: 0 0 10px var(--accent-secondary);
-}
-
-.portal-button:hover .button-glow {
-  opacity: 1;
-}
-
-/* Efecto active mejorado */
-.portal-button:active {
-  transform: translateY(2px) scale(0.98);
-}
-
-.portal-button:active .button-content {
-  box-shadow: 
-    0 5px 20px rgba(106, 255, 174, 0.4),
-    0 3px 10px rgba(106, 255, 174, 0.25);
-}
-
-/* Fondo de partículas mejorado */
-.particles-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1; /* Ajustado para estar sobre el fondo pero bajo el contenido */
-  overflow: hidden;
-  pointer-events: none;
+/* Reglas para partículas (comunes) */
+#particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
 }
 
 .particle {
-  position: absolute;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--particle-color-1) 0%, transparent 70%);
-  opacity: 0.8;
-  animation: float 15s infinite ease-in-out;
-  filter: drop-shadow(0 0 5px var(--particle-color-1));
-  will-change: transform;
-  transform: translateZ(0);
-}
-
-@keyframes float {
-  0%, 100% { transform: translate(0, 0); }
-  25% { transform: translate(5vw, 5vh); }
-  50% { transform: translate(10vw, -3vh); }
-  75% { transform: translate(-7vw, 7vh); }
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(106, 255, 174, 0.7);
+    filter: drop-shadow(0 0 3px rgba(106, 255, 174, 0.5));
+    will-change: transform;
 }
 
 .particle-connection {
-  position: absolute;
-  height: 1px;
-  background: linear-gradient(to right, 
-    var(--particle-color-1), 
-    var(--particle-color-2));
-  transform-origin: left center;
-  z-index: 1;
-  filter: drop-shadow(0 0 2px var(--particle-color-1));
-  will-change: transform, opacity;
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(to right, 
+        rgba(106, 255, 174, 0.3), 
+        rgba(106, 232, 255, 0.3));
+    transform-origin: left center;
+    z-index: 0;
 }
 
-/* Responsive mejorado */
+/* Reglas específicas para móvil */
 @media (max-width: 768px) {
-  .gradient-text {
-    font-size: clamp(2.5rem, 12vw, 4rem);
-  }
-  
-  .typewriter-effect {
-    font-size: 1.5rem;
-  }
-  
-  .button-content {
-    padding: 1rem 2rem;
-  }
-  
-  .button-text {
-    font-size: 1.1rem;
-  }
-  
-  .button-icon {
-    font-size: 1.3rem;
-  }
-  
-  /* Menos partículas en móviles */
-  .particle {
-    opacity: 0.7;
-    filter: drop-shadow(0 0 3px var(--particle-color-1));
-  }
+    .particle {
+        opacity: 0.6 !important;
+        animation: float-mobile 20s infinite linear !important;
+    }
+    
+    .particle-connection {
+        display: none !important;
+    }
+    
+    @keyframes float-mobile {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(10vw, 10vh); }
+    }
 }
 
-@media (max-width: 480px) {
-  .main-container {
-    padding: 1.5rem;
-  }
-  
-  .button-content {
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 1.2rem;
-  }
-  
-  /* Ajuste de animación para mejor rendimiento */
-  .particle {
-    animation: float 25s infinite linear;
-  }
+/* Animación para desktop */
+@keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(5vw, 3vh); }
+    50% { transform: translate(10vw, -2vh); }
+    75% { transform: translate(-5vw, 4vh); }
 }
