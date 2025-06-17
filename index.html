@@ -4,17 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sacaewyo | Developer</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="preload" href="assets/miku.png" as="image">
+    <style>
+        /* Estilos críticos para evitar FOUC */
+        body {
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-    <!-- Fondo de partículas (se genera con JS) -->
+    <!-- Contenedor de partículas (se genera automáticamente) -->
     
+    <!-- Fondo gradiente -->
+    <div class="background-effect">
+        <div class="gradient-overlay"></div>
+    </div>
+    
+    <!-- Contenido principal -->
     <main class="main-container">
-        <div class="background-effect">
-            <div class="gradient-overlay"></div>
-        </div>
-        
         <section class="hero-section">
             <div class="content-wrapper">
                 <h1 class="gradient-text">Sacaewyo</h1>
@@ -25,7 +37,6 @@
                 
                 <p class="typewriter-effect">Web Developer</p>
                 
-                <!-- Botón portal mejorado -->
                 <a href="sub/about.html" class="portal-button">
                     <span class="button-content">
                         <span class="button-text">Enter Portal</span>
@@ -69,7 +80,7 @@
             }
         }
         
-        // Fondo de partículas
+        // Fondo de partículas (versión optimizada)
         document.addEventListener('DOMContentLoaded', () => {
             // Typewriter
             setTimeout(typeWriter, 1000);
@@ -84,47 +95,60 @@
                 portalBtn.style.setProperty('--mouse-y', `${y}px`);
             });
 
-            // Configuración de partículas
+            // Configuración de partículas (visible)
             const config = {
-                particleCount: 30,
-                particleSizeMin: 2,
-                particleSizeMax: 5,
-                connectionDistance: 150,
-                particleColor: 'rgba(106, 255, 174, 0.5)'
+                particleCount: 45,
+                particleSizeMin: 4,
+                particleSizeMax: 9,
+                connectionDistance: 180,
+                particleColor: 'rgba(106, 255, 174, 0.7)',
+                connectionColor: 'rgba(106, 232, 255, 0.5)'
             };
 
             const container = document.createElement('div');
             container.className = 'particles-container';
             document.body.prepend(container);
 
-            // Crear partículas
+            // Crear partículas visibles
             const particles = [];
+            const colors = [
+                'rgba(106, 255, 174, 0.7)',
+                'rgba(106, 232, 255, 0.7)',
+                'rgba(255, 255, 255, 0.5)'
+            ];
+
             for (let i = 0; i < config.particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 
                 const size = Math.random() * (config.particleSizeMax - config.particleSizeMin) + config.particleSizeMin;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+
                 Object.assign(particle.style, {
                     width: `${size}px`,
                     height: `${size}px`,
-                    left: `${Math.random() * 100}vw`,
-                    top: `${Math.random() * 100}vh`,
-                    opacity: Math.random() * 0.5 + 0.3,
-                    animationDelay: `${Math.random() * 20}s`,
-                    animationDuration: `${Math.random() * 10 + 10}s`
+                    left: `${posX}vw`,
+                    top: `${posY}vh`,
+                    background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,
+                    opacity: 0.8,
+                    animation: `float ${15 + Math.random() * 10}s infinite ease-in-out ${Math.random() * 5}s`,
+                    filter: `drop-shadow(0 0 ${size/2}px ${color})`
                 });
 
                 container.appendChild(particle);
                 particles.push({
                     element: particle,
-                    x: Math.random() * window.innerWidth,
-                    y: Math.random() * window.innerHeight,
-                    vx: Math.random() * 0.2 - 0.1,
-                    vy: Math.random() * 0.2 - 0.1
+                    x: posX * window.innerWidth / 100,
+                    y: posY * window.innerHeight / 100,
+                    vx: (Math.random() * 0.4 - 0.2),
+                    vy: (Math.random() * 0.4 - 0.2),
+                    size: size
                 });
             }
 
-            // Conexiones entre partículas
+            // Conexiones visibles
             const connections = [];
             function updateConnections() {
                 connections.forEach(conn => conn.element.remove());
@@ -141,12 +165,19 @@
                             connection.className = 'particle-connection';
                             
                             const angle = Math.atan2(dy, dx);
+                            const opacity = 0.7 * (1 - distance / config.connectionDistance);
+                            const width = Math.max(1, particles[i].size/3 + particles[j].size/3);
+                            
                             Object.assign(connection.style, {
                                 left: `${particles[i].x}px`,
                                 top: `${particles[i].y}px`,
                                 width: `${distance}px`,
+                                height: `${width}px`,
                                 transform: `rotate(${angle}rad)`,
-                                opacity: 1 - distance / config.connectionDistance
+                                background: `linear-gradient(to right, 
+                                    rgba(106, 255, 174, ${opacity}), 
+                                    rgba(106, 232, 255, ${opacity}))`,
+                                filter: `drop-shadow(0 0 2px rgba(106, 255, 174, ${opacity/2}))`
                             });
 
                             container.appendChild(connection);
@@ -156,14 +187,21 @@
                 }
             }
 
-            // Animación
+            // Animación fluida
             function animate() {
                 particles.forEach(p => {
                     p.x += p.vx;
                     p.y += p.vy;
                     
-                    if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
-                    if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+                    // Rebotar con física mejorada
+                    if (p.x < 0 || p.x > window.innerWidth) {
+                        p.vx *= -0.8;
+                        p.x = p.x < 0 ? 0 : window.innerWidth;
+                    }
+                    if (p.y < 0 || p.y > window.innerHeight) {
+                        p.vy *= -0.8;
+                        p.y = p.y < 0 ? 0 : window.innerHeight;
+                    }
                     
                     p.element.style.transform = `translate(${p.x}px, ${p.y}px)`;
                 });
@@ -174,11 +212,16 @@
 
             animate();
 
+            // Optimización para resize
+            let resizeTimeout;
             window.addEventListener('resize', () => {
-                particles.forEach(p => {
-                    p.x = Math.random() * window.innerWidth;
-                    p.y = Math.random() * window.innerHeight;
-                });
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    particles.forEach(p => {
+                        p.x = p.x * window.innerWidth / (window.innerWidth || 1);
+                        p.y = p.y * window.innerHeight / (window.innerHeight || 1);
+                    });
+                }, 100);
             });
         });
     </script>
