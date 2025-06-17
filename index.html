@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sacaewyo | Developer</title>
     <link rel="stylesheet" href="./styles.css">
+    <link rel="preload" href="assets/miku.png" as="image">
 </head>
 <body>
+    <!-- Fondo de partículas (se genera con JS) -->
+    
     <main class="main-container">
         <div class="background-effect">
             <div class="gradient-overlay"></div>
@@ -21,7 +24,8 @@
                 </div>
                 
                 <p class="typewriter-effect">Web Developer</p>
-                <p></p>
+                
+                <!-- Botón portal mejorado -->
                 <a href="sub/about.html" class="portal-button">
                     <span class="button-content">
                         <span class="button-text">Enter Portal</span>
@@ -33,6 +37,7 @@
         </section>
     </main>
 
+    <!-- Scripts -->
     <script>
         // Efecto typewriter
         const phrases = ["Web Developer", "Casual Gamer", "Code Enthusiast"];
@@ -64,10 +69,12 @@
             }
         }
         
+        // Fondo de partículas
         document.addEventListener('DOMContentLoaded', () => {
+            // Typewriter
             setTimeout(typeWriter, 1000);
             
-            // Efecto hover dinámico para el botón
+            // Botón portal
             const portalBtn = document.querySelector('.portal-button');
             portalBtn.addEventListener('mousemove', (e) => {
                 const rect = portalBtn.getBoundingClientRect();
@@ -75,6 +82,103 @@
                 const y = e.clientY - rect.top;
                 portalBtn.style.setProperty('--mouse-x', `${x}px`);
                 portalBtn.style.setProperty('--mouse-y', `${y}px`);
+            });
+
+            // Configuración de partículas
+            const config = {
+                particleCount: 30,
+                particleSizeMin: 2,
+                particleSizeMax: 5,
+                connectionDistance: 150,
+                particleColor: 'rgba(106, 255, 174, 0.5)'
+            };
+
+            const container = document.createElement('div');
+            container.className = 'particles-container';
+            document.body.prepend(container);
+
+            // Crear partículas
+            const particles = [];
+            for (let i = 0; i < config.particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                const size = Math.random() * (config.particleSizeMax - config.particleSizeMin) + config.particleSizeMin;
+                Object.assign(particle.style, {
+                    width: `${size}px`,
+                    height: `${size}px`,
+                    left: `${Math.random() * 100}vw`,
+                    top: `${Math.random() * 100}vh`,
+                    opacity: Math.random() * 0.5 + 0.3,
+                    animationDelay: `${Math.random() * 20}s`,
+                    animationDuration: `${Math.random() * 10 + 10}s`
+                });
+
+                container.appendChild(particle);
+                particles.push({
+                    element: particle,
+                    x: Math.random() * window.innerWidth,
+                    y: Math.random() * window.innerHeight,
+                    vx: Math.random() * 0.2 - 0.1,
+                    vy: Math.random() * 0.2 - 0.1
+                });
+            }
+
+            // Conexiones entre partículas
+            const connections = [];
+            function updateConnections() {
+                connections.forEach(conn => conn.element.remove());
+                connections.length = 0;
+
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < config.connectionDistance) {
+                            const connection = document.createElement('div');
+                            connection.className = 'particle-connection';
+                            
+                            const angle = Math.atan2(dy, dx);
+                            Object.assign(connection.style, {
+                                left: `${particles[i].x}px`,
+                                top: `${particles[i].y}px`,
+                                width: `${distance}px`,
+                                transform: `rotate(${angle}rad)`,
+                                opacity: 1 - distance / config.connectionDistance
+                            });
+
+                            container.appendChild(connection);
+                            connections.push({ element: connection });
+                        }
+                    }
+                }
+            }
+
+            // Animación
+            function animate() {
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    
+                    if (p.x < 0 || p.x > window.innerWidth) p.vx *= -1;
+                    if (p.y < 0 || p.y > window.innerHeight) p.vy *= -1;
+                    
+                    p.element.style.transform = `translate(${p.x}px, ${p.y}px)`;
+                });
+
+                updateConnections();
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                particles.forEach(p => {
+                    p.x = Math.random() * window.innerWidth;
+                    p.y = Math.random() * window.innerHeight;
+                });
             });
         });
     </script>
