@@ -3,45 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacaewyo.xyz</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Sacaewyo | Developer</title>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Sacaewyo</h1>
-            <p class="subtitle">Web Developer & Casual Gamer</p>
-        </header>
+    <main class="main-container">
+        <div class="background-effect">
+            <div class="gradient-overlay"></div>
+        </div>
         
-        <main class="content">
-            <div class="left-column">
-                <h2>About Me</h2>
-                <p>
-                    Hi! I'm an amateur developer starting in this world. 
-                    I primarily work in HTML, CSS, and sometimes JS and C++. 
-                    I'm always learning stuff to help me gain experience.
-                </p>
+        <section class="hero-section">
+            <div class="content-wrapper">
+                <h1 class="gradient-text">Sacaewyo</h1>
                 
-                <h2>Projects</h2>
-                <p>
-                    Currently exploring new technologies and building personal projects.
-                    Everything is open source on my GitHub.
-                </p>
+                <div class="divider-line">
+                    <div class="line-effect"></div>
+                </div>
+                
+                <p class="typewriter-effect">Web Developer</p>
+                
+                <!-- Botón único con animación -->
+                <a href="sub/about.html" class="portal-button">
+                    <span class="button-content">
+                        <span class="button-text">Enter Portal</span>
+                        <span class="button-icon">→</span>
+                    </span>
+                    <span class="button-glow"></span>
+                </a>
             </div>
-            
-            <div class="right-column">
-                <h2>Navigate</h2>
-                <p>
-                    <a href="sub/about.html">/about</a><br>
-                    <a href="/contact">/contact</a><br>
-                    <a href="https://github.com/sacaewyo">/github</a>
-                </p>
-            </div>
-        </main>
+        </section>
+    </main>
+
+    <script>
+        // Efecto typewriter
+        const phrases = ["Web Developer", "Casual Gamer", "Code Enthusiast"];
+        let currentPhrase = 0;
+        let currentChar = 0;
+        let isDeleting = false;
+        const typewriterElement = document.querySelector('.typewriter-effect');
         
-        <footer>
-            © 2025 sacaewyo.xyz
-        </footer>
-    </div>
+        function typeWriter() {
+            const text = phrases[currentPhrase];
+            
+            if (isDeleting) {
+                typewriterElement.textContent = text.substring(0, currentChar - 1);
+                currentChar--;
+            } else {
+                typewriterElement.textContent = text.substring(0, currentChar + 1);
+                currentChar++;
+            }
+            
+            if (!isDeleting && currentChar === text.length) {
+                isDeleting = true;
+                setTimeout(typeWriter, 1500);
+            } else if (isDeleting && currentChar === 0) {
+                isDeleting = false;
+                currentPhrase = (currentPhrase + 1) % phrases.length;
+                setTimeout(typeWriter, 500);
+            } else {
+                setTimeout(typeWriter, isDeleting ? 50 : 100);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(typeWriter, 1000);
+            
+            // Efecto hover dinámico para el botón
+            const portalBtn = document.querySelector('.portal-button');
+            portalBtn.addEventListener('mousemove', (e) => {
+                const rect = portalBtn.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                portalBtn.style.setProperty('--mouse-x', `${x}px`);
+                portalBtn.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
 </body>
 </html>
