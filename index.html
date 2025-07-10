@@ -3,157 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacaewyo | Developer</title>
-    <link rel="stylesheet" href="./styles.css">
-    <style>
-        /* Preloader para evitar FOUC */
-        body {
-            opacity: 0;
-            animation: fadeIn 0.5s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-    </style>
-</head>
-<body>
-    <!-- Contenedor de partículas -->
-    <div id="particles-container"></div>
-    
-    <!-- Fondo gradiente -->
-    <div class="background-effect">
-        <div class="gradient-overlay"></div>
-    </div>
-    
-    <!-- Contenido principal -->
+    <title>Sacaewyo | Portafolio</title>
+    <link rel="stylesheet" href="styles.css">
+</navbar">
+        <h1 class="logo">Sacaewyo</h1>
+        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+    </header>
+
     <main class="main-container">
         <section class="hero-section">
-            <div class="content-wrapper">
-                <h1 class="gradient-text">Sacaewyo</h1>
-                
-                <div class="divider-line">
-                    <div class="line-effect"></div>
-                </div>
-                
-                <p class="typewriter-effect">Web Developer</p>
-                <p></p>
-                <a href="sub/about.html" class="portal-button">
-                    <span class="button-content">
-                        <span class="button-text">./About me</span>
-                    </span>
-                    <span class="button-glow"></span>
-                </a>
-            </div>
+            <h2 class="gradient-text">Desarrollador Web</h2>
+            <p class="typewriter-effect">Bienvenido a mi portafolio</p>
+            <a href="#about" class="portal-button">Sobre mí</a>
         </section>
     </main>
 
-    <script>
-        // Efecto typewriter
-        const phrases = ["Web Developer", "Casual Gamer", "Code Enthusiast"];
-        let currentPhrase = 0;
-        let currentChar = 0;
-        let isDeleting = false;
-        const typewriterElement = document.querySelector('.typewriter-effect');
-        
-        function typeWriter() {
-            const text = phrases[currentPhrase];
-            
-            if (isDeleting) {
-                typewriterElement.textContent = text.substring(0, currentChar - 1);
-                currentChar--;
-            } else {
-                typewriterElement.textContent = text.substring(0, currentChar + 1);
-                currentChar++;
-            }
-            
-            if (!isDeleting && currentChar === text.length) {
-                isDeleting = true;
-                setTimeout(typeWriter, 1500);
-            } else if (isDeleting && currentChar === 0) {
-                isDeleting = false;
-                currentPhrase = (currentPhrase + 1) % phrases.length;
-                setTimeout(typeWriter, 500);
-            } else {
-                setTimeout(typeWriter, isDeleting ? 50 : 100);
-            }
-        }
-
-        // Partículas adaptativas
-        document.addEventListener('DOMContentLoaded', () => {
-            // Typewriter
-            setTimeout(typeWriter, 1000);
-            
-            // Detección de móvil
-            const isMobile = window.matchMedia("(max-width: 768px)").matches;
-            const container = document.getElementById('particles-container');
-            
-            // Configuración
-            const particles = [];
-            const particleCount = isMobile ? 20 : 35;
-            const particleSize = isMobile ? 3 : 4;
-            const particleOpacity = isMobile ? 0.6 : 0.8;
-
-            // Crear partículas
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                Object.assign(particle.style, {
-                    width: `${particleSize}px`,
-                    height: `${particleSize}px`,
-                    left: `${Math.random() * 100}vw`,
-                    top: `${Math.random() * 100}vh`,
-                    opacity: particleOpacity,
-                    animation: `float ${15 + Math.random() * 10}s infinite ease-in-out`
-                });
-                container.appendChild(particle);
-                particles.push(particle);
-            }
-
-            // Solo animar conexiones en desktop
-            if (!isMobile) {
-                const connections = [];
-                
-                function updateConnections() {
-                    connections.forEach(c => c.remove());
-                    connections.length = 0;
-                    
-                    particles.forEach(p1 => {
-                        particles.forEach(p2 => {
-                            const dx = parseFloat(p1.style.left) - parseFloat(p2.style.left);
-                            const dy = parseFloat(p1.style.top) - parseFloat(p2.style.top);
-                            const distance = Math.sqrt(dx * dx + dy * dy);
-                            
-                            if (distance > 0 && distance < 150) {
-                                const conn = document.createElement('div');
-                                conn.className = 'particle-connection';
-                                Object.assign(conn.style, {
-                                    left: p1.style.left,
-                                    top: p1.style.top,
-                                    width: `${distance}px`,
-                                    opacity: 1 - distance / 150,
-                                    transform: `rotate(${Math.atan2(dy, dx)}rad)`
-                                });
-                                container.appendChild(conn);
-                                connections.push(conn);
-                            }
-                        });
-                    });
-                }
-                
-                // Animación
-                function animate() {
-                    particles.forEach(p => {
-                        const x = parseFloat(p.style.left) + (Math.random() * 0.2 - 0.1);
-                        const y = parseFloat(p.style.top) + (Math.random() * 0.2 - 0.1);
-                        p.style.left = `${x}vw`;
-                        p.style.top = `${y}vh`;
-                    });
-                    updateConnections();
-                    requestAnimationFrame(animate);
-                }
-                animate();
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
-</html>
+</>
