@@ -1,23 +1,881 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacaewyo.xyz</title>
-    <link rel="stylesheet" href="styles.css">
-</navbar">
-        <h1 class="logo">Sacaewyo</h1>
-        <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
-    </header>
+    <title>Reparaciones Henry | Hardware & Software</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <main class="main-container">
-        <section class="hero-section">
-            <h2 class="gradient-text">Sacaewyo</h2>
-            <p class="typewriter-effect">Web dev</p>
-            <a href="#about" class="portal-button">About me</a>
-        </section>
-    </main>
+        :root {
+            --neon-orange: #FF6B35;
+            --neon-yellow: #FFD23F;
+            --deep-navy: #0A0E27;
+            --slate: #1A1F3A;
+            --electric-blue: #00D9FF;
+            --soft-white: #F5F5F5;
+        }
 
-    <script src="script.js"></script>
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--deep-navy);
+            color: var(--soft-white);
+            overflow-x: hidden;
+        }
+
+        .grain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 100;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .bg-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--electric-blue) 1px, transparent 1px),
+                linear-gradient(90deg, var(--electric-blue) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.03;
+            animation: gridMove 20s linear infinite;
+        }
+
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.2;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--neon-orange), transparent);
+            top: -10%;
+            right: -5%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--electric-blue), transparent);
+            bottom: -10%;
+            left: -5%;
+            animation-delay: 2s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--neon-yellow), transparent);
+            top: 50%;
+            left: 50%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(-30px, 30px) scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .glitch-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--neon-orange), var(--neon-yellow), var(--electric-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.5)); }
+            50% { filter: drop-shadow(0 0 40px rgba(255, 107, 53, 0.8)); }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 500;
+            margin-bottom: 3rem;
+            color: var(--soft-white);
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-orange), var(--neon-yellow));
+            color: var(--deep-navy);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--soft-white);
+            border: 2px solid var(--electric-blue);
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 217, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.4);
+        }
+
+        .services {
+            padding: 6rem 2rem;
+            position: relative;
+            background: linear-gradient(180deg, var(--deep-navy) 0%, var(--slate) 100%);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--neon-orange);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--soft-white);
+            opacity: 0.7;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: rgba(26, 31, 58, 0.6);
+            border: 1px solid rgba(0, 217, 255, 0.2);
+            border-radius: 16px;
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--neon-orange), var(--neon-yellow));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-orange);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.2);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .service-card:nth-child(1) .service-icon { animation-delay: 0s; }
+        .service-card:nth-child(2) .service-icon { animation-delay: 0.2s; }
+        .service-card:nth-child(3) .service-icon { animation-delay: 0.4s; }
+        .service-card:nth-child(4) .service-icon { animation-delay: 0.6s; }
+
+        .service-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--neon-yellow);
+        }
+
+        .service-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .service-list li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--soft-white);
+            opacity: 0.9;
+        }
+
+        .service-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--electric-blue);
+            font-weight: bold;
+        }
+
+        .modality {
+            padding: 6rem 2rem;
+            background: var(--deep-navy);
+        }
+
+        .modality-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .modality-card {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1), rgba(0, 217, 255, 0.1));
+            border: 2px solid transparent;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .modality-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--neon-orange), var(--electric-blue));
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modality-card:hover::before {
+            opacity: 1;
+        }
+
+        .modality-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modality-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--neon-orange);
+        }
+
+        .modality-desc {
+            color: var(--soft-white);
+            opacity: 0.85;
+            line-height: 1.6;
+        }
+
+        .pricing {
+            padding: 6rem 2rem;
+            background: var(--deep-navy);
+            position: relative;
+        }
+
+        .cash-only {
+            color: var(--neon-yellow);
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 210, 63, 0.5);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 3rem;
+        }
+
+        .price-card {
+            background: rgba(26, 31, 58, 0.8);
+            border: 2px solid rgba(0, 217, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            position: relative;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .price-card.featured {
+            border-color: var(--neon-orange);
+            background: rgba(255, 107, 53, 0.1);
+            transform: scale(1.05);
+        }
+
+        .featured-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--neon-orange), var(--neon-yellow));
+            color: var(--deep-navy);
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .price-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon-orange);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.3);
+        }
+
+        .price-card.featured:hover {
+            transform: scale(1.05) translateY(-8px);
+        }
+
+        .price-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .price-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--electric-blue);
+            margin-bottom: 1rem;
+        }
+
+        .price-amount {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 0.3rem;
+            margin: 1rem 0;
+        }
+
+        .currency {
+            font-size: 2rem;
+            color: var(--neon-yellow);
+            font-weight: 700;
+        }
+
+        .amount {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--neon-orange);
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
+        }
+
+        .price-desc {
+            color: var(--soft-white);
+            opacity: 0.9;
+            line-height: 1.6;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .price-note {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--electric-blue);
+            opacity: 0.8;
+            font-style: italic;
+            margin-top: 1rem;
+        }
+
+        .price-card:last-child .price-note {
+            color: var(--neon-yellow);
+            font-weight: 600;
+            opacity: 1;
+            font-style: normal;
+        }
+
+        .payment-notice {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 107, 53, 0.1);
+            border: 2px solid var(--neon-orange);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .payment-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .payment-notice p {
+            color: var(--soft-white);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .payment-notice strong {
+            color: var(--neon-yellow);
+            font-weight: 700;
+        }
+
+        .price-btn {
+            display: block;
+            width: 100%;
+            padding: 0.9rem 1.5rem;
+            margin-top: 1.5rem;
+            background: linear-gradient(135deg, var(--neon-orange), var(--neon-yellow));
+            color: var(--deep-navy);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .price-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.5);
+        }
+
+        .price-btn::before {
+            content: '💬 ';
+        }
+
+        .contact {
+            padding: 6rem 2rem;
+            background: linear-gradient(180deg, var(--deep-navy) 0%, var(--slate) 100%);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-text {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            color: var(--soft-white);
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            color: var(--neon-yellow);
+            font-weight: 600;
+        }
+
+        footer {
+            background: var(--deep-navy);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(0, 217, 255, 0.2);
+        }
+
+        footer p {
+            color: var(--soft-white);
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                padding: 4rem 1.5rem;
+            }
+
+            .services, .modality, .contact {
+                padding: 4rem 1.5rem;
+            }
+
+            .cta-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .tech-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.02;
+            background-image: repeating-linear-gradient(
+                0deg,
+                var(--electric-blue) 0px,
+                transparent 1px,
+                transparent 2px,
+                var(--electric-blue) 3px
+            );
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="grain"></div>
+    
+    <section class="hero">
+        <div class="bg-grid"></div>
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+        
+        <div class="hero-content">
+            <h1 class="glitch-text">REPARACIONES HENRY</h1>
+            <p class="subtitle">Tu computadora funcionando al 100% • Hardware & Software</p>
+            <div class="cta-group">
+                <a href="#servicios" class="btn btn-primary">Ver Servicios</a>
+                <a href="#precios" class="btn btn-secondary">Ver Precios</a>
+                <a href="#contacto" class="btn btn-secondary">Contactar</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="servicios">
+        <div class="tech-pattern"></div>
+        <h2 class="section-title">Servicios Técnicos</h2>
+        <p class="section-subtitle">Soluciones completas para mantener tu equipo en óptimas condiciones</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">⚙️</div>
+                <h3 class="service-title">Hardware</h3>
+                <ul class="service-list">
+                    <li>Actualización de BIOS</li>
+                    <li>Mejora de componentes</li>
+                    <li>Limpieza profunda</li>
+                    <li>Cambio de pasta térmica</li>
+                    <li>Diagnóstico de fallas</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">💻</div>
+                <h3 class="service-title">Software</h3>
+                <ul class="service-list">
+                    <li>Solución de pantallazos azules</li>
+                    <li>Optimización de rendimiento</li>
+                    <li>Eliminación de bloatware</li>
+                    <li>Instalación de sistemas</li>
+                    <li>Recuperación de datos</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔧</div>
+                <h3 class="service-title">Mantenimiento</h3>
+                <ul class="service-list">
+                    <li>Limpieza preventiva</li>
+                    <li>Actualización de drivers</li>
+                    <li>Configuración de seguridad</li>
+                    <li>Respaldo de información</li>
+                    <li>Checkup completo</li>
+                </ul>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">⚡</div>
+                <h3 class="service-title">Upgrades</h3>
+                <ul class="service-list">
+                    <li>Instalación de RAM</li>
+                    <li>Cambio a SSD</li>
+                    <li>Actualización de GPU</li>
+                    <li>Mejora de refrigeración</li>
+                    <li>Asesoría personalizada</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="modality">
+        <h2 class="section-title">Modalidades de Servicio</h2>
+        <p class="section-subtitle">Flexibilidad total para atenderte como mejor te convenga</p>
+        
+        <div class="modality-cards">
+            <div class="modality-card">
+                <div class="modality-icon">🌐</div>
+                <h3 class="modality-title">Remoto</h3>
+                <p class="modality-desc">
+                    Soluciono problemas de software sin que salgas de casa. 
+                    Conexión segura y rápida.
+                </p>
+            </div>
+
+            <div class="modality-card">
+                <div class="modality-icon">📍</div>
+                <h3 class="modality-title">Punto Medio</h3>
+                <p class="modality-desc">
+                    Nos encontramos en un lugar conveniente para ambos. 
+                    Recibo y entrego tu equipo.
+                </p>
+            </div>
+
+            <div class="modality-card">
+                <div class="modality-icon">🏠</div>
+                <h3 class="modality-title">En Taller</h3>
+                <p class="modality-desc">
+                    Para reparaciones que requieren más tiempo y herramientas especializadas.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing" id="precios">
+        <h2 class="section-title">Precios</h2>
+        <p class="section-subtitle">Tarifas claras y accesibles • <span class="cash-only">Solo efectivo 💵</span></p>
+        
+        <div class="pricing-grid">
+            <div class="price-card">
+                <div class="price-header">
+                    <h3 class="price-title">Diagnóstico</h3>
+                    <div class="price-amount">
+                        <span class="currency">$</span>
+                        <span class="amount">100</span>
+                    </div>
+                </div>
+                <p class="price-desc">Revisión completa para identificar el problema</p>
+                <div class="price-note">Se descuenta si contratas el servicio</div>
+                <a href="https://wa.me/52XXXXXXXXXX?text=Hola%20Henry,%20necesito%20un%20*diagnóstico*%20de%20mi%20computadora.%20¿Cuándo%20podrías%20revisarla?" class="price-btn">Solicitar</a>
+            </div>
+
+            <div class="price-card featured">
+                <div class="featured-badge">Popular</div>
+                <div class="price-header">
+                    <h3 class="price-title">Limpieza + Optimización</h3>
+                    <div class="price-amount">
+                        <span class="currency">$</span>
+                        <span class="amount">350</span>
+                    </div>
+                </div>
+                <p class="price-desc">Limpieza física, cambio de pasta térmica y optimización de software</p>
+                <a href="https://wa.me/52XXXXXXXXXX?text=Hola%20Henry,%20quiero%20el%20servicio%20de%20*Limpieza%20+%20Optimización*%20($350).%20¿Cuándo%20podemos%20coordinar?" class="price-btn">Solicitar</a>
+            </div>
+
+            <div class="price-card">
+                <div class="price-header">
+                    <h3 class="price-title">Instalación de SO</h3>
+                    <div class="price-amount">
+                        <span class="currency">$</span>
+                        <span class="amount">250</span>
+                    </div>
+                </div>
+                <p class="price-desc">Windows/Linux + drivers + programas básicos</p>
+                <a href="https://wa.me/52XXXXXXXXXX?text=Hola%20Henry,%20necesito%20una%20*instalación%20de%20sistema%20operativo*%20($250).%20¿Qué%20opciones%20recomiendas?" class="price-btn">Solicitar</a>
+            </div>
+
+            <div class="price-card">
+                <div class="price-header">
+                    <h3 class="price-title">Actualización BIOS</h3>
+                    <div class="price-amount">
+                        <span class="currency">$</span>
+                        <span class="amount">200</span>
+                    </div>
+                </div>
+                <p class="price-desc">Actualización segura del firmware</p>
+                <a href="https://wa.me/52XXXXXXXXXX?text=Hola%20Henry,%20necesito%20una%20*actualización%20de%20BIOS*%20($200).%20¿Cómo%20funciona%20el%20proceso?" class="price-btn">Solicitar</a>
+            </div>
+
+            <div class="price-card">
+                <div class="price-header">
+                    <h3 class="price-title">Instalación de Componentes</h3>
+                    <div class="price-amount">
+                        <span class="currency">$</span>
+                        <span class="amount">150</span>
+                    </div>
+                </div>
+                <p class="price-desc">RAM, SSD, GPU u otro componente que traigas</p>
+                <div class="price-note">Componentes no incluidos</div>
+                <a href="https://wa.me/52XXXXXXXXXX?text=Hola%20Henry,%20quiero%20instalar%20componentes%20en%20mi%20PC%20($150).%20Tengo:%20[describe%20qué%20componente]" class="price-btn">Solicitar</a>
+            </div>
+
+            <div class="price-card">
+                <div class="price-header">
+                    <h3 class="price-title">Soporte Remoto</h3>
+                    <div class="price-amount">
+                        <span class="currency">$</span>
+                        <span class="amount">200</span>
+                    </div>
+                </div>
+                <p class="price-desc">Solución de problemas de software a distancia</p>
+                <div class="price-note">💳 Acepta transferencia</div>
+                <a href="https://wa.me/52XXXXXXXXXX?text=Hola%20Henry,%20necesito%20*soporte%20remoto*%20($200).%20El%20problema%20es:%20[describe%20tu%20problema]" class="price-btn">Solicitar</a>
+            </div>
+        </div>
+
+        <div class="payment-notice">
+            <div class="payment-icon">💰</div>
+            <p>Pago en <strong>efectivo</strong> • Transferencia disponible <strong>solo para servicio remoto</strong></p>
+            <p style="font-size: 0.95rem; opacity: 0.8; margin-top: 0.5rem;">Los precios pueden variar según la complejidad del trabajo</p>
+        </div>
+    </section>
+
+    <section class="contact" id="contacto">
+        <div class="tech-pattern"></div>
+        <div class="contact-content">
+            <h2 class="section-title">¿Listo para mejorar tu PC?</h2>
+            <p class="contact-text">
+                Contáctame y cuéntame qué necesitas. Te daré un diagnóstico honesto 
+                y un presupuesto claro. <span class="highlight">Sin letra chiquita, sin sorpresas.</span>
+            </p>
+            <div class="cta-group" style="justify-content: center;">
+                <a href="https://wa.me/52XXXXXXXXXX?text=Hola%20Henry,%20necesito%20información%20sobre%20tus%20servicios.%20" class="btn btn-primary">WhatsApp - Cotización</a>
+                <a href="tel:+52XXXXXXXXXX" class="btn btn-secondary">Llamar</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Reparaciones Henry • Servicio confiable y garantizado</p>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe service cards
+        document.querySelectorAll('.service-card, .modality-card, .price-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
 </body>
-</>
+</html>
